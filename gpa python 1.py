@@ -22,10 +22,8 @@ print("==============================================")
 print("============= AOU GPA CALCULATOR =============")
 print("==============================================")
 n = int(input("Number of courses : "))
-j = 0
-i = 0
-k = 0
-l = 0
+while n < 1 :
+    n = int(input("Invalid number please enter positive number : "))
 sub = list(range(1,n+1))
 hours = list(range(1,n+1))
 points = list(range(1,n+1))
@@ -35,6 +33,8 @@ for j in range (n):
     print("------------------------------------------------------------------")
     name[j] = str(input("Name of the cousre : "))
     sub[j] = float(input("Total grades : "))
+    while sub[j] < 0 or sub[j] > 100:
+        sub[j] = float(input("Invalid grade please enter in range from 0 to 100 : "))
     hours[j] = int(input("Number of hours : "))
     j = j + 1
 
