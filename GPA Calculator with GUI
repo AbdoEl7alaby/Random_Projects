@@ -1,0 +1,116 @@
+import tkinter as tk
+
+root = tk.Tk()
+root.geometry("400x250")
+root.resizable(False, False)
+root.title("GPA Calculator")
+C=[]
+G=[]
+P=[]
+H=[]
+L=[]
+
+#---------------------------------------------------
+
+def add():
+
+    C.append(course_entry.get())
+    G.append(float(grades_entry.get()))
+    H.append(int(hours_entry.get()))
+    if int(grades_entry.get()) >= 90:
+        P.append(4)
+        L.append('A')
+    elif 82 <= int(grades_entry.get()) <= 89:
+        P.append(3.5)
+        L.append('B+')
+    elif 74 <= int(grades_entry.get()) <= 81:
+        P.append(3)
+        L.append('B')
+    elif 66 <= int(grades_entry.get()) <= 73:
+        P.append(2.5)
+        L.append('C+')
+    elif 58 <= int(grades_entry.get()) <=65:
+        P.append(2)
+        L.append('C')
+    elif 50 <= int(grades_entry.get()) <= 57:
+        P.append(1.5)
+        L.append('D')
+    else:
+        P.append(0)
+        L.append('F')
+
+    course_entry.delete(0,tk.END)
+    hours_entry.delete(0,tk.END)
+    grades_entry.delete(0,tk.END)
+    
+def calc():
+    try:
+        T = sum(H)
+        S = 0
+        for i in range (len(P)):
+            S+=P[i]*H[i]
+        gpa = round(S / T,2)
+        popup = tk.Toplevel(root)
+        popup.title("GPA")
+        label = tk.Label(popup,text="")
+        label.grid(row=0,column=0,padx=10,pady=10)
+        label.config(text=label["text"]+"Your grade in each course\n")
+        for i in range (len(P)):
+            label.config(text=label["text"]+f"{C[i]} : {L[i]}\n")
+        label2 = tk.Label(popup,text=f"Your GPA is {gpa}",font=("Arial",18))
+        label2.grid(padx=10,pady=10)
+        C.clear()
+        G.clear()
+        P.clear()
+        H.clear()
+        course_entry.delete(0,tk.END)
+        hours_entry.delete(0,tk.END)
+        grades_entry.delete(0,tk.END)
+    except ArithmeticError:
+        popup = tk.Toplevel(root)
+        popup.title("ERROR")
+        label = tk.Label(popup,text="Invalid numbers\nCheck your entries",font=("Arial",20),fg="red")
+        label.grid(row=0,column=0,padx=10,pady=10)
+        
+def clear():
+    C.clear()
+    G.clear()
+    P.clear()
+    H.clear()
+    course_entry.delete(0,tk.END)
+    hours_entry.delete(0,tk.END)
+    grades_entry.delete(0,tk.END)
+
+#---------------------------------------------------
+    
+course=tk.Label(root,text="Course name")
+course.place(relx=0.5, rely=0.1, anchor=tk.CENTER)
+course_entry=tk.Entry(root,width=10)
+course_entry.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
+
+grades=tk.Label(root,text="Course grades (from 0 to 100)")
+grades.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
+grades_entry=tk.Entry(root,width=3)
+grades_entry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
+
+hours=tk.Label(root,text="Course hours")
+hours.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+hours_entry=tk.Entry(root,width=3)
+hours_entry.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
+
+errorLabel=tk.Label(root,text="")
+errorLabel.place(relx=0.5, rely=0.8, anchor=tk.CENTER)
+#---------------------------------------------------
+
+btn=tk.Button(root,text="Add",command=add)
+btn.place(relx=0.35, rely=0.7, anchor=tk.CENTER)
+
+btn2=tk.Button(root,text="Calculate",command=calc)
+btn2.place(relx=0.5, rely=0.7, anchor=tk.CENTER)
+
+btn3=tk.Button(root,text="Clear",command=clear)
+btn3.place(relx=0.65, rely=0.7, anchor=tk.CENTER)
+
+#---------------------------------------------------
+root.mainloop()
+
