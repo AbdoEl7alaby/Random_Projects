@@ -17,22 +17,22 @@ def add():
     C.append(course_entry.get())
     G.append(float(grades_entry.get()))
     H.append(int(hours_entry.get()))
-    if int(grades_entry.get()) >= 90:
+    if float(grades_entry.get()) >= 90:
         P.append(4)
         L.append('A')
-    elif 82 <= int(grades_entry.get()) <= 89:
+    elif 82 <= float(grades_entry.get()) <= 89:
         P.append(3.5)
         L.append('B+')
-    elif 74 <= int(grades_entry.get()) <= 81:
+    elif 74 <= float(grades_entry.get()) <= 81:
         P.append(3)
         L.append('B')
-    elif 66 <= int(grades_entry.get()) <= 73:
+    elif 66 <= float(grades_entry.get()) <= 73:
         P.append(2.5)
         L.append('C+')
-    elif 58 <= int(grades_entry.get()) <=65:
+    elif 58 <= float(grades_entry.get()) <=65:
         P.append(2)
         L.append('C')
-    elif 50 <= int(grades_entry.get()) <= 57:
+    elif 50 <= float(grades_entry.get()) <= 57:
         P.append(1.5)
         L.append('D')
     else:
@@ -90,12 +90,12 @@ course_entry.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
 
 grades=tk.Label(root,text="Course grades (from 0 to 100)")
 grades.place(relx=0.5, rely=0.3, anchor=tk.CENTER)
-grades_entry=tk.Entry(root,width=3)
+grades_entry=tk.Entry(root,width=5)
 grades_entry.place(relx=0.5, rely=0.4, anchor=tk.CENTER)
 
 hours=tk.Label(root,text="Course hours")
 hours.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
-hours_entry=tk.Entry(root,width=3)
+hours_entry=tk.Entry(root,width=2)
 hours_entry.place(relx=0.5, rely=0.6, anchor=tk.CENTER)
 
 errorLabel=tk.Label(root,text="")
@@ -113,4 +113,3 @@ btn3.place(relx=0.65, rely=0.7, anchor=tk.CENTER)
 
 #---------------------------------------------------
 root.mainloop()
-
